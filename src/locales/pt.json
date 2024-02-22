@@ -1,0 +1,35 @@
+{
+  "home": {
+    "button": "Jogar",
+    "themeButton": {
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema"
+    },
+    "infoDialog": {
+      "title": "Instruções do Jogo",
+      "subTitles": {
+        "one": "1. Atualização Diária do Anime:",
+        "two": "2. Objetivo do Jogo:",
+        "three": "3. Dicas Principais e Tentativas Mínimas:",
+        "four": "4. Submissão do Palpite:",
+        "five": "5. Ícones de Comparação:",
+        "six": "6. Divirta-se Jogando:"
+      },
+      "content": {
+        "one": "O anime será atualizado diariamente à meia-noite no fuso horário UTC-3.",
+        "two": "O objetivo é adivinhar o anime com o mínimo de dicas possível. Digite o nome do anime no prompt e faça a busca.",
+        "three": "O jogo fornece três tipos de dicas principais: abertura, screenshots e cenas. Tentativas mínimas para liberar as dicas:",
+        "four": "Abertura: 3 tentativas.",
+        "five": "Screenshots: 5 tentativas.",
+        "six": "Cenas: 8 tentativas.",
+        "seven": "Quando um anime é submetido, seus atributos são comparados com os do anime do dia.",
+        "eight": "Atributo numérico do anime do dia é maior do que o do palpite.",
+        "nine": "Atributo numérico do anime do dia é menor do que o do palpite.",
+        "ten": "Atributo não é igual ao do anime do palpite.",
+        "eleven": "Atributo é compartilhado entre o anime do dia e o palpite.",
+        "twelve": "Tenha um bom jogo! Aproveite a experiência de adivinhar e explorar novos animes."
+      }
+    }
+  }
+}

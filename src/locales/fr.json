@@ -1,0 +1,35 @@
+{
+  "home": {
+    "button": "Jouer",
+    "themeButton": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
+    "infoDialog": {
+      "title": "Instructions du Jeu",
+      "subTitles": {
+        "one": "1. Mise à Jour Quotidienne de l'Anime:",
+        "two": "2. Objectif du Jeu:",
+        "three": "3. Principaux Conseils et Tentatives Minimales:",
+        "four": "4. Soumission de la Supposition:",
+        "five": "5. Icônes de Comparaison:",
+        "six": "6. Amusez-vous à Jouer:"
+      },
+      "content": {
+        "one": "L'anime sera mis à jour quotidiennement à minuit dans le fuseau horaire UTC-3.",
+        "two": "L'objectif est de deviner l'anime avec le minimum de conseils possible. Tapez le nom de l'anime dans l'invite et recherchez.",
+        "three": "Le jeu fournit trois types principaux de conseils: ouverture, captures d'écran et scènes. Tentatives minimales pour libérer les conseils:",
+        "four": "Ouverture: 3 tentatives.",
+        "five": "Captures d'écran: 5 tentatives.",
+        "six": "Scènes: 8 tentatives.",
+        "seven": "Lorsqu'un anime est soumis, ses attributs sont comparés à ceux de l'anime du jour.",
+        "eight": "L'attribut numérique de l'anime du jour est supérieur à celui de la supposition.",
+        "nine": "L'attribut numérique de l'anime du jour est inférieur à celui de la supposition.",
+        "ten": "L'attribut n'est pas égal à celui de l'anime de la supposition.",
+        "eleven": "L'attribut est partagé entre l'anime du jour et la supposition.",
+        "twelve": "Bon jeu! Profitez de l'expérience de deviner et d'explorer de nouveaux animes."
+      }
+    }
+  }
+}

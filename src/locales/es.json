@@ -1,0 +1,35 @@
+{
+  "home": {
+    "button": "Jugar",
+    "themeButton": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    },
+    "infoDialog": {
+      "title": "Instrucciones del Juego",
+      "subTitles": {
+        "one": "1. Actualización Diaria del Anime:",
+        "two": "2. Objetivo del Juego:",
+        "three": "3. Consejos Principales y Mínimos Intentos:",
+        "four": "4. Envío de la Suposición:",
+        "five": "5. Iconos de Comparación:",
+        "six": "6. Diviértete Jugando:"
+      },
+      "content": {
+        "one": "El anime se actualizará diariamente a la medianoche en la zona horaria UTC-3.",
+        "two": "El objetivo es adivinar el anime con el mínimo de consejos posible. Escriba el nombre del anime en el indicador y busque.",
+        "three": "El juego proporciona tres tipos principales de consejos: apertura, capturas de pantalla y escenas. Intentos mínimos para liberar los consejos:",
+        "four": "Apertura: 3 intentos.",
+        "five": "Capturas de pantalla: 5 intentos.",
+        "six": "Escenas: 8 intentos.",
+        "seven": "Cuando se envía un anime, sus atributos se comparan con los del anime del día.",
+        "eight": "El atributo numérico del anime del día es mayor que el de la suposición.",
+        "nine": "El atributo numérico del anime del día es menor que el de la suposición.",
+        "ten": "El atributo no es igual al del anime de la suposición.",
+        "eleven": "El atributo se comparte entre el anime del día y la suposición.",
+        "twelve": "¡Que tengas un buen juego! Disfruta de la experiencia de adivinar y explorar nuevos animes."
+      }
+    }
+  }
+}

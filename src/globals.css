@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient: #abdf3a;
+
+    --background: 84 46.8% 4.4%;
+    --foreground: 84 7.199999999999999% 97.75%;
+
+    --muted: 84 36% 16.5%;
+    --muted-foreground: 84 7.199999999999999% 55.5%;
+
+    --popover: 84 50.6% 7.15%;
+    --popover-foreground: 84 7.199999999999999% 97.75%;
+
+    --card: 84 50.6% 7.15%;
+    --card-foreground: 84 7.199999999999999% 97.75%;
+
+    --border: 84 36% 16.5%;
+    --input: 84 36% 16.5%;
+
+    --primary: 84 72% 55%;
+    --primary-foreground: 84 7.199999999999999% 5.5%;
+
+    --secondary: 84 36% 16.5%;
+    --secondary-foreground: 84 7.199999999999999% 97.75%;
+
+    --accent: 84 36% 16.5%;
+    --accent-foreground: 84 7.199999999999999% 97.75%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 84 7.199999999999999% 97.75%;
+
+    --ring: 84 72% 55%;
+  }
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 84 72% 55%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 84 72% 55%;
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: "Red Hat Display", sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient);
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--foreground);
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: var(--foreground);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "home": {
+    "button": "Play",
+    "themeButton": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "infoDialog": {
+      "title": "Game Instructions",
+      "subTitles": {
+        "one": "1. Daily Anime Update:",
+        "two": "2. Game Objective:",
+        "three": "3. Main Tips and Minimum Attempts:",
+        "four": "4. Guess Submission:",
+        "five": "5. Comparison Icons:",
+        "six": "6. Have Fun Playing:"
+      },
+      "content": {
+        "one": "The anime will be updated daily at midnight in the UTC-3 time zone.",
+        "two": "The objective is to guess the anime with the minimum of tips possible. Type the anime name in the prompt and search.",
+        "three": "The game provides three main types of tips: opening, screenshots, and scenes. Minimum attempts to release the tips:",
+        "four": "Opening: 3 attempts.",
+        "five": "Screenshots: 5 attempts.",
+        "six": "Scenes: 8 attempts.",
+        "seven": "When an anime is submitted, its attributes are compared with those of the anime of the day.",
+        "eight": "The numerical attribute of the anime of the day is greater than that of the guess.",
+        "nine": "The numerical attribute of the anime of the day is less than that of the guess.",
+        "ten": "The attribute is not equal to that of the anime of the guess.",
+        "eleven": "The attribute is shared between the anime of the day and the guess.",
+        "twelve": "Have a good game! Enjoy the experience of guessing and exploring new animes."
+      }
+    }
+  }
+}
