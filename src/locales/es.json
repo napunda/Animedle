@@ -31,5 +31,24 @@
         "twelve": "¡Que tengas un buen juego! Disfruta de la experiencia de adivinar y explorar nuevos animes."
       }
     }
+  },
+  "play": {
+    "title": "¡Adivina el anime de hoy!",
+    "input": "Haz una suposición...",
+    "hints": {
+      "opening": {
+        "title": "Escuchar Opening",
+        "content": "Escucha la apertura:",
+        "tooltip": "Desbloqueado después de 3 intentos"
+      },
+      "screenshots": {
+        "title": "Ver Capturas de pantalla",
+        "tooltip": "Desbloqueado después de 5 intentos"
+      },
+      "scenes": {
+        "title": "Ver Escenas",
+        "tooltip": "Desbloqueado después de 8 intentos"
+      }
+    }
   }
 }

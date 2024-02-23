@@ -31,5 +31,24 @@
         "twelve": "Have a good game! Enjoy the experience of guessing and exploring new animes."
       }
     }
+  },
+  "play": {
+    "title": "Guess today's anime!",
+    "input": "Take a guess...",
+    "hints": {
+      "opening": {
+        "title": "Listen Opening",
+        "content": "Listen to the opening:",
+        "tooltip": "Unlocked after 3 attempts"
+      },
+      "screenshots": {
+        "title": "View Screenshots",
+        "tooltip": "Unlocked after 5 attempts"
+      },
+      "scenes": {
+        "title": "Watch Scenes",
+        "tooltip": "Unlocked after 8 attempts"
+      }
+    }
   }
 }

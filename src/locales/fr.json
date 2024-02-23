@@ -31,5 +31,24 @@
         "twelve": "Bon jeu! Profitez de l'expérience de deviner et d'explorer de nouveaux animes."
       }
     }
+  },
+  "play": {
+    "title": "Devine l'anime d'aujourd'hui !",
+    "input": "Fais une devinette...",
+    "hints": {
+      "opening": {
+        "title": "Écouter l'Opening",
+        "content": "Écoutez l'ouverture :",
+        "tooltip": "Débloqué après 3 tentatives"
+      },
+      "screenshots": {
+        "title": "Voir les captures d'écran",
+        "tooltip": "Débloqué après 5 tentatives"
+      },
+      "scenes": {
+        "title": "Regarder les scènes",
+        "tooltip": "Débloqué après 8 tentatives"
+      }
+    }
   }
 }
