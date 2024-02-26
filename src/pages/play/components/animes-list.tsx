@@ -5,7 +5,7 @@ import ArrowDownIcon from "@/assets/img/icons/arrow_down_icon.svg";
 import ArrowUpIcon from "@/assets/img/icons/arrow_up_icon.svg";
 import CheckIcon from "@/assets/img/icons/check_icon.svg";
 import XMarkIcon from "@/assets/img/icons/xmark_icon.svg";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./animes-list.module.css";
 import {
