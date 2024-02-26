@@ -1,0 +1,41 @@
+.anime_list_img {
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(2) .anime_list_img {
+  animation-delay: 0.5s;
+}
+.anime_list_wrapper .anime_list_item:nth-child(3) .anime_list_img {
+  animation-delay: 1s;
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(4) .anime_list_img {
+  animation-delay: 1.5s;
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(5) .anime_list_img {
+  animation-delay: 2s;
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(6) .anime_list_img {
+  animation-delay: 2.5s;
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(7) .anime_list_img {
+  animation-delay: 3s;
+}
+
+.anime_list_wrapper .anime_list_item:nth-child(8) .anime_list_img {
+  animation-delay: 3.5s;
+}

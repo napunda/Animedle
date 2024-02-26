@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
 
 @layer base {
   :root {
@@ -90,5 +91,10 @@
   }
   ::-webkit-scrollbar-corner {
     background: transparent;
+  }
+
+  .aspect-retract {
+    aspect-ratio: 72 / 96;
+    object-fit: cover;
   }
 }

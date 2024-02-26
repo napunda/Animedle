@@ -14,6 +14,9 @@ import {
   IHintScenesContent,
   IHintScreenshotsContent,
 } from "./interfaces/hints";
+import { AnimesList } from "./components/animes-list";
+import { IAnimeContent } from "./interfaces/anime";
+
 export interface IAnimeTitle {
   id: number;
   title: string;
@@ -29,6 +32,10 @@ export const PlayPage = () => {
   const { t } = useTranslation();
   const { content: configContent, isLoading } = useConfigStore();
   const [animeTitles, setAnimeTitles] = useState<IOptions[]>([]);
+  const [guesses, setGuesses] = useState<number[]>([]);
+  const [clearInput, setClearInput] = useState<boolean>(false);
+  const [isLoadingAnimes, setIsLoadingAnimes] = useState<boolean>(false);
+  const [animesGuesses, setAnimesGuesses] = useState<IAnimeContent[]>([]);
   const [titleSelect, setTitleSelect] = useState<IAnimeTitle>(
     {} as IAnimeTitle
   );
@@ -41,6 +48,10 @@ export const PlayPage = () => {
     queryKey: ["startGame"],
     queryFn: fetchStartGame,
   });
+
+  const fetchAnime = async (animeId: string) => {
+    return (await axiosService.get<IAnimeContent>(`/anime/${animeId}`)).data;
+  };
 
   async function fetchAnimeTitles(autoCompleteInput: string, guesses: string) {
     const { data } = await axiosService.get("/animes-titles", {
@@ -75,13 +86,28 @@ export const PlayPage = () => {
       setAnimeTitles([]);
       return;
     }
-    fetchAnimeTitles(event.target.value, "");
+    fetchAnimeTitles(event.target.value, guesses.join(","));
   }
 
   function submitAnswer(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!titleSelect.title) return;
+    setIsLoadingAnimes(true);
 
-    console.log(titleSelect);
+    fetchAnime(titleSelect.id.toString())
+      .then((anime) => {
+        setAnimesGuesses((prev) => [anime, ...prev]);
+        setGuesses((prev) => [anime.id, ...prev]);
+      })
+      .finally(() => {
+        setAnimeTitles([]);
+        setTitleSelect({} as IAnimeTitle);
+        setIsLoadingAnimes(false);
+        setClearInput(true);
+        setTimeout(() => {
+          setClearInput(false); //@TODO: find a better way to do this
+        }, 100);
+      });
   }
 
   return (
@@ -108,6 +134,7 @@ export const PlayPage = () => {
             />
             <form onSubmit={submitAnswer} className="flex pt-8">
               <Autocomplete
+                clearInput={clearInput}
                 className="w-full h-[3rem] text-md"
                 placeholder={t("play.input")}
                 options={animeTitles}
@@ -125,6 +152,7 @@ export const PlayPage = () => {
               </Button>
             </form>
           </div>
+          <AnimesList animes={animesGuesses} isLoading={isLoadingAnimes} />
         </div>
       ) : (
         <div className="h-screen flex justify-center items-center">
