@@ -20,15 +20,15 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
   return (
     <DialogRoot open={open} onOpenChange={setOpenDialog}>
       <DialogContent
-        className="max-w-xl"
+        className="max-w-[600px] w-[100%]"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader>
-          <DialogTitle className="font-extrabold text-xl">
+          <DialogTitle className="font-extrabold sm:text-xl text-md">
             {t("home.infoDialog.title")}
           </DialogTitle>
         </DialogHeader>
-        <div className="text-sm">
+        <div className="sm:text-sm text-xs">
           <p className="mb-2">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.one")}
@@ -37,7 +37,7 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
           <ul>
             <li>{t("home.infoDialog.content.one")}</li>
           </ul>
-          <p className="my-2">
+          <p className="sm:my-2 my-1">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.two")}
             </strong>
@@ -45,7 +45,7 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
           <ul>
             <li>{t("home.infoDialog.content.one")}</li>
           </ul>
-          <p className="my-2">
+          <p className="sm:my-2 my-1">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.three")}
             </strong>
@@ -58,7 +58,7 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
               <li>{t("home.infoDialog.content.six")}</li>
             </ul>
           </ul>
-          <p className="my-2">
+          <p className="sm:my-2 my-1">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.four")}
             </strong>
@@ -66,15 +66,15 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
           <ul>
             <li>{t("home.infoDialog.content.seven")}</li>
           </ul>
-          <p className="my-2">
+          <p className="sm:my-2 my-1">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.five")}
             </strong>
           </p>
-          <ul className="flex gap-y-3 flex-col">
+          <ul className="flex flex-col sm:gap-y-3 gap-y-2">
             <li className="flex gap-2">
               <img
-                className="h-[1.5rem] w-[1.5rem] dark:filter dark:invert"
+                className="sm:h-[1.5rem] sm:w-[1.5rem] h-[1.2rem] w-[1.2rem] dark:filter dark:invert"
                 src={ArrowUpIcon}
                 alt="icon"
               />
@@ -82,7 +82,7 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
             </li>
             <li className="flex gap-2">
               <img
-                className="h-[1.5rem] w-[1.5rem] dark:filter dark:invert"
+                className="sm:h-[1.5rem] sm:w-[1.5rem] h-[1.2rem] w-[1.2rem] dark:filter dark:invert"
                 src={ArrowDownIcon}
                 alt="icon"
               />
@@ -90,7 +90,7 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
             </li>
             <li className="flex gap-2">
               <img
-                className="h-[1.5rem] w-[1.5rem] dark:filter dark:invert"
+                className="sm:h-[1.5rem] sm:w-[1.5rem] h-[1.2rem] w-[1.2rem] dark:filter dark:invert"
                 src={XMarkIcon}
                 alt="icon"
               />
@@ -98,14 +98,14 @@ export const Dialog = ({ open, setOpenDialog }: DialogAlertProps) => {
             </li>
             <li className="flex gap-2">
               <img
-                className="h-[1.5rem] w-[1.5rem] dark:filter dark:invert"
+                className="sm:h-[1.5rem] sm:w-[1.5rem] h-[1.2rem] w-[1.2rem] dark:filter dark:invert"
                 src={CheckIcon}
                 alt="icon"
               />
               <span>{t("home.infoDialog.content.eleven")}</span>
             </li>
           </ul>
-          <p className="my-2">
+          <p className="sm:my-2 my-1">
             <strong className="font-bold">
               {t("home.infoDialog.subTitles.six")}
             </strong>

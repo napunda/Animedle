@@ -11,6 +11,7 @@ export interface AutocompleteProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   options: IOptions[];
   onSelectOption: (option: IOptions) => void;
+  clearInput?: boolean;
 }
 
 export interface IOptions {
@@ -20,7 +21,10 @@ export interface IOptions {
 
 export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
   forwardRef<HTMLInputElement, AutocompleteProps>(
-    ({ className, type, options, onSelectOption, ...props }, ref) => {
+    (
+      { className, type, options, onSelectOption, clearInput, ...props },
+      ref
+    ) => {
       const inputRef = useRef<HTMLInputElement>(null);
       const listRef = useRef<HTMLUListElement>(null);
       const [optionsState, setOptionsState] = useState<IOptions[]>(options);
@@ -54,6 +58,8 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
           Enter: () => {
             if (highlightedOption !== null) {
               handleOptionSelect(optionsState[highlightedOption].title);
+              setHighlightedOption(null);
+              setOptionsState([]);
             }
           },
         };
@@ -68,6 +74,18 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
       const handleOnBlur = () => {
         setTimeout(() => {
           setOptionsState([]);
+        }, 200);
+      };
+      const handleOnFocus = () => {
+        setTimeout(() => {
+          const inputValue = inputRef.current?.value?.toLowerCase() ?? "";
+          const foundOption = options.find(
+            (option) => option.title.toLowerCase() === inputValue
+          );
+
+          if (!foundOption) {
+            setOptionsState(options);
+          }
         }, 200);
       };
 
@@ -100,6 +118,12 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
         }
       }, [highlightedOption]);
 
+      useEffect(() => {
+        if (clearInput && inputRef.current) {
+          inputRef.current.value = "";
+        }
+      }, [clearInput]);
+
       return (
         <div className="relative w-full">
           <input
@@ -111,7 +135,7 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
             ref={inputRef}
             onKeyDown={handleKeyDown}
             onBlur={handleOnBlur}
-            onFocus={() => setOptionsState(options)}
+            onFocus={handleOnFocus}
             {...props}
           />
           {optionsState.length > 0 && (
