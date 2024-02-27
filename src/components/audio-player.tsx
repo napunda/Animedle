@@ -113,20 +113,20 @@ const AudioPlayer = ({ audio, autoPlay }: AudioPlayerProps) => {
     <div className="grid place-items-center gap-2">
       <button onClick={togglePlay}>
         {isPlaying && (
-          <PauseCircle className="h-[4rem] w-[4rem] text-primary" />
+          <PauseCircle className="sm:h-[4rem] h-[2.5rem] sm:w-[4rem] w-[2.5rem] text-primary" />
         )}
         {!isPlaying && (
-          <PlayCircle className="h-[4rem] w-[4rem] text-primary" />
+          <PlayCircle className="sm:h-[4rem] h-[2.5rem] sm:w-[4rem] w-[2.5rem] text-primary" />
         )}
       </button>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center w-full">
         <div className="w-10">
           <span className="text-sm font-semibold">
             {formatTime(currentTime)}
           </span>
         </div>
         <Slider
-          className="w-80 cursor-pointer"
+          className="w-full cursor-pointer"
           defaultValue={[0]}
           max={duration}
           min={0}

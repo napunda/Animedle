@@ -1,19 +1,24 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { IAnimeContent } from "../interfaces/anime";
-import { LoadingSpinner } from "@/components/loading-spinner";
-import ArrowDownIcon from "@/assets/img/icons/arrow_down_icon.svg";
-import ArrowUpIcon from "@/assets/img/icons/arrow_up_icon.svg";
-import CheckIcon from "@/assets/img/icons/check_icon.svg";
-import XMarkIcon from "@/assets/img/icons/xmark_icon.svg";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./animes-list.module.css";
+
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CheckIcon,
+  XMarkIcon,
+} from "@/components/comparison-icons";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { SkeletonAnime } from "./skeleton-anime";
+import { ReactElement } from "react";
 
 interface IAnimesListProps {
   animes: IAnimeContent[];
@@ -22,7 +27,7 @@ interface IAnimesListProps {
 
 interface IAnimeColumnProps {
   value: string | number;
-  imgSource: string;
+  icon: ReactElement;
 }
 interface IAnimesColumnsWrapperProps {
   anime: IAnimeContent;
@@ -42,7 +47,7 @@ const gridCols = {
   gridTemplateColumns: `repeat(${animesHeaders.length}, 1fr)`,
 };
 
-const AnimeColumn = ({ value, imgSource }: IAnimeColumnProps) => {
+const AnimeColumn = ({ value, icon }: IAnimeColumnProps) => {
   const isString = typeof value === "string";
   const hasMoreThanTwoWords = isString && value.split(" ").length >= 2;
 
@@ -71,24 +76,46 @@ const AnimeColumn = ({ value, imgSource }: IAnimeColumnProps) => {
           {value}
         </span>
       )}
-      <img
-        alt={imgSource}
-        src={imgSource}
-        className={
-          styles.anime_list_img + " w-[2rem] h-[2rem] dark:filter dark:invert"
-        }
-      />
+      {icon}
     </div>
   );
 };
 
 const AnimesColumnsWrapper = ({ anime }: IAnimesColumnsWrapperProps) => {
-  const getIconSource = (value: string) => {
-    const icons: { [key: string]: string } = {
-      xmark: XMarkIcon,
-      check: CheckIcon,
-      arrow_up: ArrowUpIcon,
-      arrow_down: ArrowDownIcon,
+  const getIcon = (value: string) => {
+    const icons: { [key: string]: ReactElement } = {
+      xmark: (
+        <XMarkIcon
+          className={
+            styles.anime_list_img +
+            " w-[2rem] h-[2rem] stroke-primary dark:opacity-50 dark:stroke-white"
+          }
+        />
+      ),
+      check: (
+        <CheckIcon
+          className={
+            styles.anime_list_img +
+            " w-[2rem] h-[2rem] fill-primary dark:fill-white"
+          }
+        />
+      ),
+      arrow_up: (
+        <ArrowUpIcon
+          className={
+            styles.anime_list_img +
+            " w-[2rem] h-[2rem] stroke-primary dark:opacity-50 dark:stroke-white"
+          }
+        />
+      ),
+      arrow_down: (
+        <ArrowDownIcon
+          className={
+            styles.anime_list_img +
+            " w-[2rem] h-[2rem] stroke-primary dark:opacity-50 dark:stroke-white "
+          }
+        />
+      ),
     };
 
     return icons[value];
@@ -130,31 +157,31 @@ const AnimesColumnsWrapper = ({ anime }: IAnimesColumnsWrapperProps) => {
       </div>
       <AnimeColumn
         value={anime.genre.value.title}
-        imgSource={getIconSource(anime.genre.daily.icon)}
+        icon={getIcon(anime.genre.daily.icon)}
       />
       <AnimeColumn
         value={anime.episodes.value}
-        imgSource={getIconSource(anime.episodes.daily.icon)}
+        icon={getIcon(anime.episodes.daily.icon)}
       />
       <AnimeColumn
         value={anime.studio.value.title}
-        imgSource={getIconSource(anime.studio.daily.icon)}
+        icon={getIcon(anime.studio.daily.icon)}
       />
       <AnimeColumn
         value={anime.rating.value}
-        imgSource={getIconSource(anime.rating.daily.icon)}
+        icon={getIcon(anime.rating.daily.icon)}
       />
       <AnimeColumn
         value={anime.season.value.title}
-        imgSource={getIconSource(anime.season.daily.icon)}
+        icon={getIcon(anime.season.daily.icon)}
       />
       <AnimeColumn
         value={anime.release_year.value}
-        imgSource={getIconSource(anime.release_year.daily.icon)}
+        icon={getIcon(anime.release_year.daily.icon)}
       />
       <AnimeColumn
         value={anime.finished.value ? "Sim" : "Não"}
-        imgSource={getIconSource(anime.finished.daily.icon)}
+        icon={getIcon(anime.finished.daily.icon)}
       />
     </div>
   );
@@ -173,7 +200,7 @@ const AnimesList = ({ animes, isLoading }: IAnimesListProps) => {
           </div>
         </CardContent>
       </Card>
-      {isLoading && <LoadingSpinner className="mt-8" />}
+      {isLoading && <SkeletonAnime />}
       {animes.map((anime) => (
         <AnimesColumnsWrapper key={anime.id} anime={anime} />
       ))}

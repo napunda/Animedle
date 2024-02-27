@@ -41,7 +41,7 @@ export const PlayPage = () => {
     {} as IAnimeTitle
   );
 
-  const [debouncedAutoCompleteInput] = useDebounce(autoCompleteInput, 800);
+  const [debouncedAutoCompleteInput] = useDebounce(autoCompleteInput, 500);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAutoCompleteInput(event.target.value);
   };
@@ -85,13 +85,6 @@ export const PlayPage = () => {
       await axiosService.get<IHintScenesContent>(`/hints/scenes/${animeId}`)
     ).data;
   }
-  useEffect(() => {
-    if (!debouncedAutoCompleteInput || titleSelect.id) {
-      setAnimeTitles([]);
-      return;
-    }
-    fetchAnimeTitles(debouncedAutoCompleteInput, guesses.join(","));
-  }, [debouncedAutoCompleteInput, guesses, titleSelect]);
 
   function submitAnswer(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -110,6 +103,14 @@ export const PlayPage = () => {
         setAutoCompleteInput("");
       });
   }
+
+  useEffect(() => {
+    if (!debouncedAutoCompleteInput || titleSelect.id) {
+      setAnimeTitles([]);
+      return;
+    }
+    fetchAnimeTitles(debouncedAutoCompleteInput, guesses.join(","));
+  }, [debouncedAutoCompleteInput, guesses, titleSelect]);
 
   return (
     <>
