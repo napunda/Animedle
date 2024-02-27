@@ -3,12 +3,13 @@ import { useConfigStore } from "@/stores/ConfigState";
 import { Link } from "react-router-dom";
 import { Autocomplete, IOptions } from "@/components/ui/autocomplete";
 import { axiosService } from "@/services/axios.service";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { HintsWrapper } from "./components/hints-wrapper";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useDebounce } from "use-debounce";
 import {
   IHintOpeningContent,
   IHintScenesContent,
@@ -31,14 +32,19 @@ export interface IStartGameContent {
 export const PlayPage = () => {
   const { t } = useTranslation();
   const { content: configContent, isLoading } = useConfigStore();
+  const [autoCompleteInput, setAutoCompleteInput] = useState<string>("");
   const [animeTitles, setAnimeTitles] = useState<IOptions[]>([]);
   const [guesses, setGuesses] = useState<number[]>([]);
-  const [clearInput, setClearInput] = useState<boolean>(false);
   const [isLoadingAnimes, setIsLoadingAnimes] = useState<boolean>(false);
   const [animesGuesses, setAnimesGuesses] = useState<IAnimeContent[]>([]);
   const [titleSelect, setTitleSelect] = useState<IAnimeTitle>(
     {} as IAnimeTitle
   );
+
+  const [debouncedAutoCompleteInput] = useDebounce(autoCompleteInput, 800);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setAutoCompleteInput(event.target.value);
+  };
 
   async function fetchStartGame(): Promise<IStartGameContent> {
     return (await axiosService.get<IStartGameContent>("/play/start")).data;
@@ -79,15 +85,13 @@ export const PlayPage = () => {
       await axiosService.get<IHintScenesContent>(`/hints/scenes/${animeId}`)
     ).data;
   }
-
-  function onInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const inputValue = event.target.value;
-    if (!inputValue || inputValue === "") {
+  useEffect(() => {
+    if (!debouncedAutoCompleteInput || titleSelect.id) {
       setAnimeTitles([]);
       return;
     }
-    fetchAnimeTitles(event.target.value, guesses.join(","));
-  }
+    fetchAnimeTitles(debouncedAutoCompleteInput, guesses.join(","));
+  }, [debouncedAutoCompleteInput, guesses, titleSelect]);
 
   function submitAnswer(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -103,10 +107,7 @@ export const PlayPage = () => {
         setAnimeTitles([]);
         setTitleSelect({} as IAnimeTitle);
         setIsLoadingAnimes(false);
-        setClearInput(true);
-        setTimeout(() => {
-          setClearInput(false); //@TODO: find a better way to do this
-        }, 100);
+        setAutoCompleteInput("");
       });
   }
 
@@ -134,11 +135,12 @@ export const PlayPage = () => {
             />
             <form onSubmit={submitAnswer} className="flex pt-8">
               <Autocomplete
-                clearInput={clearInput}
-                className="w-full h-[3rem] text-md"
                 placeholder={t("play.input")}
+                setInputValue={setAutoCompleteInput}
+                value={autoCompleteInput}
+                className="w-full h-[3rem] text-md"
                 options={animeTitles}
-                onChange={onInputChange}
+                onChange={handleInputChange}
                 onSelectOption={(option: IOptions) => {
                   setTitleSelect(option);
                 }}

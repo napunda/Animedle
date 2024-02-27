@@ -11,7 +11,7 @@ export interface AutocompleteProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   options: IOptions[];
   onSelectOption: (option: IOptions) => void;
-  clearInput?: boolean;
+  setInputValue: (value: string) => void;
 }
 
 export interface IOptions {
@@ -22,7 +22,7 @@ export interface IOptions {
 export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
   forwardRef<HTMLInputElement, AutocompleteProps>(
     (
-      { className, type, options, onSelectOption, clearInput, ...props },
+      { className, type, options, onSelectOption, setInputValue, ...props },
       ref
     ) => {
       const inputRef = useRef<HTMLInputElement>(null);
@@ -34,7 +34,7 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
 
       const handleOptionSelect = (option: string) => {
         if (inputRef.current) {
-          inputRef.current.value = option;
+          setInputValue(option);
           const selectedOption = optionsState.find((o) => o.title === option);
           if (selectedOption) {
             onSelectOption(selectedOption);
@@ -117,12 +117,6 @@ export const Autocomplete: ForwardRefExoticComponent<AutocompleteProps> =
           }
         }
       }, [highlightedOption]);
-
-      useEffect(() => {
-        if (clearInput && inputRef.current) {
-          inputRef.current.value = "";
-        }
-      }, [clearInput]);
 
       return (
         <div className="relative w-full">
