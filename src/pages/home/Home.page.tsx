@@ -17,7 +17,7 @@ export const HomePage = () => {
         <div className="h-full flex justify-center items-center flex-col">
           <LazyLoadImage
             effect="opacity"
-            className="h-80"
+            className="h-80 drop-shadow-md dark:drop-shadow-none"
             src={
               homeContent.img
                 ? import.meta.env.VITE_BASE_URL_STATIC + homeContent.img

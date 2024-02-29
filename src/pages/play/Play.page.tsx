@@ -88,7 +88,7 @@ export const PlayPage = () => {
           <Link to="/">
             <LazyLoadImage
               effect="opacity"
-              className="h-[13rem] w-[13rem]"
+              className="h-[13rem] w-[13rem] drop-shadow-md dark:drop-shadow-none"
               src={
                 configContent?.img
                   ? import.meta.env.VITE_BASE_URL_STATIC + configContent?.img
