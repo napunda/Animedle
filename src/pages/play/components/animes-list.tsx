@@ -189,18 +189,20 @@ const AnimesColumnsWrapper = ({ anime }: IAnimesColumnsWrapperProps) => {
 const AnimesList = ({ animes, isLoading }: IAnimesListProps) => {
   return (
     <>
-      <Card className="mt-8">
-        <CardContent className="p-4">
-          <div className={"grid gap-5 "} style={gridCols}>
-            {animesHeaders.map((header) => (
-              <span key={header} className="text-sm text-center">
-                {header}
-              </span>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-      {!isLoading && <SkeletonAnime />}
+      {animes && (
+        <Card className="mt-8">
+          <CardContent className="p-4">
+            <div className={"grid gap-5 "} style={gridCols}>
+              {animesHeaders.map((header) => (
+                <span key={header} className="text-sm text-center">
+                  {header}
+                </span>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+      {isLoading && <SkeletonAnime />}
       {animes?.map((anime) => (
         <AnimesColumnsWrapper key={anime.id} anime={anime} />
       ))}
