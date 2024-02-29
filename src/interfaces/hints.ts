@@ -18,3 +18,15 @@ export interface IHintOpeningContent {
 export interface IHintScenesContent {
   scenes: string;
 }
+
+export interface IGameHints {
+  opening?: IHintOpeningContent | null;
+  scenes?: IHintScenesContent | null;
+  screenshots?: IHintScreenshotsContent | null;
+}
+
+export interface IHintAvailable {
+  opening?: boolean | null;
+  scenes?: boolean | null;
+  screenshots?: boolean | null;
+}

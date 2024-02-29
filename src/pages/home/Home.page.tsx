@@ -4,6 +4,8 @@ import { LoadingSpinner } from "@/components/loading-spinner";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useConfigStore } from "@/stores/ConfigState";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const HomePage = () => {
   const { t } = useTranslation();
@@ -13,7 +15,8 @@ export const HomePage = () => {
     <div className="h-screen">
       {!isLoading && homeContent ? (
         <div className="h-full flex justify-center items-center flex-col">
-          <img
+          <LazyLoadImage
+            effect="opacity"
             className="h-80"
             src={
               homeContent.img
@@ -22,6 +25,7 @@ export const HomePage = () => {
             }
             alt={homeContent.name ?? ""}
           />
+
           <Link to="/play" className="mt-10">
             <Button className="h-[4rem] w-[10rem]">
               <span className="font-bold text-xl mr-2">{t("home.button")}</span>

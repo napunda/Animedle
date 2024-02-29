@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { IAnimeContent } from "../interfaces/anime";
+import { IAnimeContent } from "../../../interfaces/anime";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./animes-list.module.css";
@@ -21,7 +21,7 @@ import { SkeletonAnime } from "./skeleton-anime";
 import { ReactElement } from "react";
 
 interface IAnimesListProps {
-  animes: IAnimeContent[];
+  animes?: IAnimeContent[] | null;
   isLoading: boolean;
 }
 
@@ -201,7 +201,7 @@ const AnimesList = ({ animes, isLoading }: IAnimesListProps) => {
         </CardContent>
       </Card>
       {isLoading && <SkeletonAnime />}
-      {animes.map((anime) => (
+      {animes?.map((anime) => (
         <AnimesColumnsWrapper key={anime.id} anime={anime} />
       ))}
     </>
