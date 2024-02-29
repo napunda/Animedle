@@ -200,7 +200,7 @@ const AnimesList = ({ animes, isLoading }: IAnimesListProps) => {
           </div>
         </CardContent>
       </Card>
-      {isLoading && <SkeletonAnime />}
+      {!isLoading && <SkeletonAnime />}
       {animes?.map((anime) => (
         <AnimesColumnsWrapper key={anime.id} anime={anime} />
       ))}

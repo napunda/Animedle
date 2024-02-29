@@ -7,20 +7,20 @@
   :root {
     --gradient: #abdf3a;
 
-    --background: 84 46.8% 4.4%;
+    --background: 180, 12%, 8%;
     --foreground: 84 7.199999999999999% 97.75%;
 
     --muted: 84 36% 16.5%;
     --muted-foreground: 84 7.199999999999999% 55.5%;
 
-    --popover: 84 50.6% 7.15%;
+    --popover: 132, 8%, 12%;
     --popover-foreground: 84 7.199999999999999% 97.75%;
 
-    --card: 84 50.6% 7.15%;
+    --card: 132, 8%, 12%;
     --card-foreground: 84 7.199999999999999% 97.75%;
 
-    --border: 84 36% 16.5%;
-    --input: 84 36% 16.5%;
+    --border: 0 0% 50%;
+    --input: 79, 72%, 55%;
 
     --primary: 84 72% 55%;
     --primary-foreground: 84 7.199999999999999% 5.5%;
