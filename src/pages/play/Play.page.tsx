@@ -69,7 +69,10 @@ export const PlayPage = () => {
   }
 
   useEffect(() => {
-    if (!debouncedAutoCompleteInput || titleSelect.id) {
+    if (!debouncedAutoCompleteInput) {
+      return;
+    }
+    if (titleSelect.id || titleSelect.title) {
       setAnimeTitles([]);
       return;
     }

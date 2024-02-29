@@ -22,16 +22,14 @@ interface IGameState {
   };
   start: () => Promise<void>;
   addGuess: (anime: IAnimeContent) => void;
-  setHintAvailable: {
-    opening: (available: boolean) => void;
-    screenshots: (available: boolean) => void;
-    scenes: (available: boolean) => void;
-  };
-  setHints: {
-    opening: (opening: IHintOpeningContent) => void;
-    screenshots: (screenshots: IHintScreenshotsContent) => void;
-    scenes: (scenes: IHintScenesContent) => void;
-  };
+
+  setHintAvailableOpening: (available: boolean) => void;
+  setHintAvailableScreenshots: (available: boolean) => void;
+  setHintAvailableScenes: (available: boolean) => void;
+
+  setHintOpening: (opening: IHintOpeningContent) => void;
+  setHintScreenshots: (screenshots: IHintScreenshotsContent) => void;
+  setHintScenes: (scenes: IHintScenesContent) => void;
 }
 
 async function fetchHintOpening(animeId: string) {
@@ -91,87 +89,85 @@ const gameStore = create(
           };
         });
       },
-      setHintAvailable: {
-        opening: (available) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hintAvailable: {
-                  ...state.content.hintAvailable,
-                  opening: available,
-                },
+
+      setHintAvailableOpening: (available) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hintAvailable: {
+                ...state.content.hintAvailable,
+                opening: available,
               },
-            };
-          });
-        },
-        screenshots: (available) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hintAvailable: {
-                  ...state.content.hintAvailable,
-                  screenshots: available,
-                },
-              },
-            };
-          });
-        },
-        scenes: (available) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hintAvailable: {
-                  ...state.content.hintAvailable,
-                  scenes: available,
-                },
-              },
-            };
-          });
-        },
+            },
+          };
+        });
       },
-      setHints: {
-        opening: (opening) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hints: {
-                  ...state.content.hints,
-                  opening: opening,
-                },
+      setHintAvailableScreenshots: (available) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hintAvailable: {
+                ...state.content.hintAvailable,
+                screenshots: available,
               },
-            };
-          });
-        },
-        screenshots: (screenshots) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hints: {
-                  ...state.content.hints,
-                  screenshots: screenshots,
-                },
+            },
+          };
+        });
+      },
+      setHintAvailableScenes: (available) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hintAvailable: {
+                ...state.content.hintAvailable,
+                scenes: available,
               },
-            };
-          });
-        },
-        scenes: (scenes) => {
-          set((state) => {
-            return {
-              content: {
-                ...state.content,
-                hints: {
-                  ...state.content.hints,
-                  scenes: scenes,
-                },
+            },
+          };
+        });
+      },
+
+      setHintOpening: (opening) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hints: {
+                ...state.content.hints,
+                opening: opening,
               },
-            };
-          });
-        },
+            },
+          };
+        });
+      },
+      setHintScreenshots: (screenshots) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hints: {
+                ...state.content.hints,
+                screenshots: screenshots,
+              },
+            },
+          };
+        });
+      },
+      setHintScenes: (scenes) => {
+        set((state) => {
+          return {
+            content: {
+              ...state.content,
+              hints: {
+                ...state.content.hints,
+                scenes: scenes,
+              },
+            },
+          };
+        });
       },
     }),
     {
@@ -184,7 +180,9 @@ const gameStore = create(
 if (!isSubscribed) {
   gameStore.subscribe((state) => {
     const {
-      setHints,
+      setHintOpening,
+      setHintScreenshots,
+      setHintScenes,
       content: { hintAvailable, settings, hints },
     } = state;
 
@@ -192,17 +190,17 @@ if (!isSubscribed) {
 
     if (hintAvailable?.opening && !hints?.opening) {
       fetchHintOpening(settings.anime).then((opening) => {
-        setHints.opening(opening);
+        setHintOpening(opening);
       });
     }
     if (hintAvailable?.screenshots && !hints?.screenshots) {
       fetchHintScreenshots(settings.anime).then((screenshots) => {
-        setHints.screenshots(screenshots);
+        setHintScreenshots(screenshots);
       });
     }
     if (hintAvailable?.scenes && !hints?.scenes) {
       fetchHintScenes(settings.anime).then((scenes) => {
-        setHints.scenes(scenes);
+        setHintScenes(scenes);
       });
     }
   });
@@ -212,18 +210,20 @@ if (!isSubscribed) {
 
 gameStore.subscribe((state) => {
   const {
-    setHintAvailable,
+    setHintAvailableOpening,
+    setHintAvailableScenes,
+    setHintAvailableScreenshots,
     content: { animesGuesses, hintAvailable },
   } = state;
 
   if (!hintAvailable?.opening && animesGuesses?.length === 3) {
-    setHintAvailable.opening(true);
+    setHintAvailableOpening(true);
   }
   if (!hintAvailable?.screenshots && animesGuesses?.length === 5) {
-    setHintAvailable.screenshots(true);
+    setHintAvailableScreenshots(true);
   }
   if (!hintAvailable?.scenes && animesGuesses?.length === 8) {
-    setHintAvailable.scenes(true);
+    setHintAvailableScenes(true);
   }
 
   if (
@@ -236,7 +236,7 @@ gameStore.subscribe((state) => {
 });
 
 export const useGameStore = () => {
-  const { start, addGuess, setHintAvailable, isLoading, content } = gameStore();
+  const { start, addGuess, isLoading, content } = gameStore();
 
   useQuery({
     queryKey: ["startGame"],
@@ -244,5 +244,5 @@ export const useGameStore = () => {
     enabled: !content.settings && !isLoading,
   });
 
-  return { start, addGuess, setHintAvailable, isLoading, content };
+  return { start, addGuess, isLoading, content };
 };
