@@ -1,18 +1,7 @@
 import { create } from "zustand";
-import { axiosService } from "@/services/axios.service";
 import { useQuery } from "@tanstack/react-query";
-
-export interface ContentConfigResponse {
-  img: string | null;
-  name: string | null;
-  short_name: string | null;
-  icon: string | null;
-  share: string | null;
-  instagram: string | null;
-  twitter: string | null;
-  buymeacoffee: string | null;
-}
-
+import { ContentConfigResponse } from "@/interfaces/configs";
+import { ConfigsApi } from "@/api/configs";
 interface ConfigState {
   content: ContentConfigResponse | null;
   isLoading: boolean;
@@ -25,14 +14,10 @@ const configStore = create<ConfigState>((set) => ({
   isLoading: true,
   isError: false,
   fetchData: async () => {
-    try {
-      const response = await axiosService.get<ContentConfigResponse>(
-        "/configs"
-      );
-      set({ content: response.data, isLoading: false, isError: false });
-    } catch (error) {
-      console.error("Erro ao buscar dados da API:", error);
-      set({ isLoading: false, isError: true });
+    const data = await ConfigsApi();
+    if (!data) set({ isError: true });
+    if (data) {
+      set({ content: data, isLoading: false });
     }
   },
 }));

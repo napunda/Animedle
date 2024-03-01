@@ -85,7 +85,7 @@ export const PlayPage = () => {
     <>
       {!isLoading && configContent ? (
         <div className="pt-8 container grid place-items-center">
-          <Link to="/">
+          <Link to="/" className="contents">
             <LazyLoadImage
               effect="opacity"
               className="h-[13rem] w-[13rem] drop-shadow-md dark:drop-shadow-none"

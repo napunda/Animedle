@@ -39,3 +39,8 @@ export interface Finished {
   value: boolean;
   daily: Daily;
 }
+
+export interface IAnimeTitle {
+  id: number;
+  title: string;
+}
