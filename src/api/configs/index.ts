@@ -1,1 +1,1 @@
-export { ConfigsApi } from "./ConfigsApi";
+export { ConfigsApi } from "./configsApi";

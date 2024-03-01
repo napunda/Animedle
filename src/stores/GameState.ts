@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
-import { axiosService } from "@/services/axios.service";
+import { persist } from "zustand/middleware";
 import { useQuery } from "@tanstack/react-query";
 import {
   IGameHints,
@@ -11,6 +10,8 @@ import {
 } from "@/interfaces/hints";
 import { IAnimeContent } from "@/interfaces/anime";
 import { IGameSettingsContent } from "@/interfaces/game";
+import { startGameApi } from "@/api/animes/startGameApi";
+import { OpeningApi, ScenesApi, ScreenshotsApi } from "@/api/game/hints";
 
 interface IGameState {
   isLoading: boolean;
@@ -19,6 +20,7 @@ interface IGameState {
     hints?: IGameHints | null;
     animesGuesses?: IAnimeContent[] | null;
     hintAvailable?: IHintAvailable | null;
+    guessed: boolean;
   };
   start: () => Promise<void>;
   addGuess: (anime: IAnimeContent) => void;
@@ -32,26 +34,6 @@ interface IGameState {
   setHintScenes: (scenes: IHintScenesContent) => void;
 }
 
-async function fetchHintOpening(animeId: string) {
-  return (
-    await axiosService.get<IHintOpeningContent>(`/hints/opening/${animeId}`)
-  ).data;
-}
-
-async function fetchHintScreenshots(animeId: string) {
-  return (
-    await axiosService.get<IHintScreenshotsContent>(
-      `/hints/screenshots/${animeId}`
-    )
-  ).data;
-}
-
-async function fetchHintScenes(animeId: string) {
-  return (
-    await axiosService.get<IHintScenesContent>(`/hints/scenes/${animeId}`)
-  ).data;
-}
-
 let isSubscribed = false;
 const gameStore = create(
   persist<IGameState>(
@@ -59,21 +41,34 @@ const gameStore = create(
       isLoading: true,
       content: {
         settings: null,
+        guessed: false,
       },
       start: async () => {
         try {
-          const response = await axiosService.get<IGameSettingsContent>(
-            "/play/start"
-          );
-
+          const response = await startGameApi();
           set((state) => {
+            const storageAnime = state.content.settings?.anime;
+            const responseAnime = response.anime;
+
+            if (storageAnime !== responseAnime) {
+              return {
+                content: {
+                  settings: response,
+                  hints: null,
+                  animesGuesses: null,
+                  hintAvailable: null,
+                  guessed: false,
+                },
+                isLoading: false,
+              };
+            }
             return {
-              content: { ...state.content, settings: response.data },
+              content: { ...state.content, settings: response },
               isLoading: false,
             };
           });
         } catch (error) {
-          console.error("Erro ao buscar dados da API:", error);
+          console.error("Erro ao carregar jogo", error);
           set({ isLoading: false });
         }
       },
@@ -89,7 +84,6 @@ const gameStore = create(
           };
         });
       },
-
       setHintAvailableOpening: (available) => {
         set((state) => {
           return {
@@ -129,7 +123,6 @@ const gameStore = create(
           };
         });
       },
-
       setHintOpening: (opening) => {
         set((state) => {
           return {
@@ -172,7 +165,6 @@ const gameStore = create(
     }),
     {
       name: "game-storage",
-      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
@@ -189,17 +181,17 @@ if (!isSubscribed) {
     if (!settings) return;
 
     if (hintAvailable?.opening && !hints?.opening) {
-      fetchHintOpening(settings.anime).then((opening) => {
+      OpeningApi(settings.anime).then((opening) => {
         setHintOpening(opening);
       });
     }
     if (hintAvailable?.screenshots && !hints?.screenshots) {
-      fetchHintScreenshots(settings.anime).then((screenshots) => {
+      ScreenshotsApi(settings.anime).then((screenshots) => {
         setHintScreenshots(screenshots);
       });
     }
     if (hintAvailable?.scenes && !hints?.scenes) {
-      fetchHintScenes(settings.anime).then((scenes) => {
+      ScenesApi(settings.anime).then((scenes) => {
         setHintScenes(scenes);
       });
     }
