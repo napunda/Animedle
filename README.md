@@ -1,5 +1,5 @@
 <p align="center">
-  ![Logo](https://admin.animedle.com/upload/1/1/65d896be2748b5bf82.svg)
+  <img src="https://admin.animedle.com/upload/1/1/65d896be2748b5bf82.svg" alt="Logo"/>
 </p>
 
 ## Instalação
