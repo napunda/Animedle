@@ -49,6 +49,20 @@
         "title": "Ver Escenas",
         "tooltip": "Desbloqueado después de 8 intentos"
       }
+    },
+    "tips": {
+      "opening": {
+        "title": "Consejo de Apertura disponible",
+        "content": "Ahora puedes escuchar la apertura del anime."
+      },
+      "screenshots": {
+        "title": "Consejo de Capturas de pantalla disponible",
+        "content": "Ahora puedes ver las capturas de pantalla del anime."
+      },
+      "scenes": {
+        "title": "Consejo de Escenas disponible",
+        "content": "Ahora puedes ver escenas del anime."
+      }
     }
   }
 }

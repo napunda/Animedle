@@ -49,6 +49,20 @@
         "title": "Assistir Cenas",
         "tooltip": "Liberado após 8 tentativas"
       }
+    },
+    "tips": {
+      "opening": {
+        "title": "Dica de Abertura disponível!",
+        "content": "Agora você pode ouvir a abertura do anime."
+      },
+      "screenshots": {
+        "title": "Dica de Screenshots disponível!",
+        "content": "Agora você pode ver os screenshots do anime."
+      },
+      "scenes": {
+        "title": "Dica de Cenas disponível!",
+        "content": "Agora você pode assistir cenas do anime."
+      }
     }
   }
 }

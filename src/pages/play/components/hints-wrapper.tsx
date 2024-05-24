@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 import { Music, Image, Film } from "lucide-react";
 import { AudioPlayer } from "@/components/audio-player";
@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useToast } from "@/components/ui/use-toast";
 
 interface HintsWrapperProps {
   dailyAnimeConfig: IGameSettingsContent | null;
@@ -48,6 +49,18 @@ export const HintsWrapper = ({
       showFancybox(screenshotPaths);
     }
   };
+
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (hintAvailable?.opening) {
+      toast({
+        title: t("play.hints.opening.title"),
+        description: t("play.hints.opening.description"),
+        duration: 5000,
+      });
+    }
+  }, [hintAvailable?.opening, t, toast]);
 
   return (
     <>

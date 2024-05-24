@@ -49,6 +49,20 @@
         "title": "Watch Scenes",
         "tooltip": "Unlocked after 8 attempts"
       }
+    },
+    "tips": {
+      "opening": {
+        "title": "Opening Tip available!",
+        "content": "Now you can listen to the opening of the anime."
+      },
+      "screenshots": {
+        "title": "Screenshots Tip available!",
+        "content": "Now you can view the screenshots of the anime."
+      },
+      "scenes": {
+        "title": "Scenes Tip available!",
+        "content": "Now you can watch scenes of the anime."
+      }
     }
   }
 }

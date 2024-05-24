@@ -12,6 +12,10 @@ import { IAnimeContent } from "@/interfaces/anime";
 import { IGameSettingsContent } from "@/interfaces/game";
 import { startGameApi } from "@/api/animes/startGameApi";
 import { OpeningApi, ScenesApi, ScreenshotsApi } from "@/api/game/hints";
+import { toast } from "sonner";
+import { MusicIcon, ImageIcon, FilmIcon } from "lucide-react";
+import React from "react";
+import i18n from "@/i18n";
 
 interface IGameState {
   isLoading: boolean;
@@ -210,12 +214,45 @@ gameStore.subscribe((state) => {
 
   if (!hintAvailable?.opening && animesGuesses?.length === 3) {
     setHintAvailableOpening(true);
+
+    toast(i18n.t("play.tips.opening.title"), {
+      className: "border d-flex items-center gap-4",
+      description: i18n.t("play.tips.opening.content"),
+      duration: 5000,
+      icon: React.createElement(MusicIcon, null),
+      cancel: {
+        label: "Ok",
+        onClick: () => toast.dismiss(),
+      },
+    });
   }
   if (!hintAvailable?.screenshots && animesGuesses?.length === 5) {
     setHintAvailableScreenshots(true);
+
+    toast(i18n.t("play.tips.screenshots.title"), {
+      className: "border d-flex items-center gap-4",
+      description: i18n.t("play.tips.screenshots.content"),
+      duration: 5000,
+      icon: React.createElement(ImageIcon, null),
+      cancel: {
+        label: "Ok",
+        onClick: () => toast.dismiss(),
+      },
+    });
   }
   if (!hintAvailable?.scenes && animesGuesses?.length === 8) {
     setHintAvailableScenes(true);
+
+    toast(i18n.t("play.tips.scenes.title"), {
+      className: "border d-flex items-center gap-4",
+      description: i18n.t("play.tips.scenes.content"),
+      duration: 5000,
+      icon: React.createElement(FilmIcon, null),
+      cancel: {
+        label: "Ok",
+        onClick: () => toast.dismiss(),
+      },
+    });
   }
 
   if (

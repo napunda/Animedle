@@ -33,12 +33,12 @@
     }
   },
   "play": {
-    "title": "Devine l'anime d'aujourd'hui !",
-    "input": "Fais une devinette...",
+    "title": "Devinez l'anime d'aujourd'hui !",
+    "input": "Faites une devinette...",
     "hints": {
       "opening": {
         "title": "Écouter l'Opening",
-        "content": "Écoutez l'ouverture :",
+        "content": "Écoutez l'opening :",
         "tooltip": "Débloqué après 3 tentatives"
       },
       "screenshots": {
@@ -48,6 +48,20 @@
       "scenes": {
         "title": "Regarder les scènes",
         "tooltip": "Débloqué après 8 tentatives"
+      }
+    },
+    "tips": {
+      "opening": {
+        "title": "Astuce d'ouverture disponible !",
+        "content": "Maintenant vous pouvez écouter l'ouverture de l'anime."
+      },
+      "screenshots": {
+        "title": "Astuce de captures d'écran disponible !",
+        "content": "Maintenant vous pouvez voir les captures d'écran de l'anime."
+      },
+      "scenes": {
+        "title": "Astuce de scènes disponible !",
+        "content": "Maintenant vous pouvez regarder les scènes de l'anime."
       }
     }
   }
