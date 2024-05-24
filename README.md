@@ -1,5 +1,6 @@
-
-![Logo](https://admin.animedle.com/upload/1/1/65d896be2748b5bf82.svg)
+<p align="center">
+  ![Logo](https://admin.animedle.com/upload/1/1/65d896be2748b5bf82.svg)
+</p>
 
 ## Instalação
 
